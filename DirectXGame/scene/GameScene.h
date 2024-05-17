@@ -7,6 +7,14 @@
 #include "Sprite.h"
 #include "ViewProjection.h"
 #include "WorldTransform.h"
+#include "Player.h"
+#include "Skydome.h"
+#include "MathUtilityForText.h"
+#include <vector>
+
+#include "DebugCamera.h"
+
+
 
 /// <summary>
 /// ゲームシーン
@@ -47,4 +55,41 @@ private: // メンバ変数
 	/// <summary>
 	/// ゲームシーン用
 	/// </summary>
+
+	// テクスチャハンドル
+	uint32_t textureHandle_ = 0;
+
+	// プレイヤー3Dモデル
+	Model* model_ = nullptr;
+
+	// ビュープロジェクション
+	ViewProjection viewProjection_;
+
+
+	// 自キャラ
+	Player* player_ = nullptr;
+
+	// ブロック3Dモデル
+	Model* modelBlock_ = nullptr;
+
+
+	//std::vector<WorldTransform*> worldTransformBlocks_;
+
+	std::vector<std::vector<WorldTransform*>> worldTransformBlocks_;
+
+	// デバッグカメラ有効
+	bool isDebugCameraActive_ = false;
+
+	// デバッグカメラ
+	DebugCamera* debugCamera_ = nullptr;
+
+	// スカイドーム
+	Skydome* skydome_ = nullptr;
+
+	// 3Dモデル
+	Model* modelSkydome_ = nullptr;
+
+
+
+
 };
