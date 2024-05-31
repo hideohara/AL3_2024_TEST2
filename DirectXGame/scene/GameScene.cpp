@@ -36,23 +36,24 @@ void GameScene::Initialize() {
 	audio_ = Audio::GetInstance();
 
 	// ファイル名を指定してテクスチャを読み込む
-	textureHandle_ = TextureManager::Load("test.png");
+	//textureHandle_ = TextureManager::Load("test.png");
 
 	// 3Dモデルの生成
-	model_ = Model::Create();
+	//model_ = Model::Create(); 
+	model_ = Model::CreateFromOBJ("player");
 
 	// ビュープロジェクションの初期化
-	//viewProjection_.farZ = 1000;
+	viewProjection_.farZ = 1000;
 	viewProjection_.Initialize();
 
 
 	// 自キャラの生成
 	player_ = new Player();
 	// 自キャラの初期化
-	player_->Initialize(model_, textureHandle_, &viewProjection_);
+	player_->Initialize(model_, &viewProjection_);
 
 	// ブロック3Dモデルの生成
-	modelBlock_ = Model::CreateFromOBJ("cube");
+	modelBlock_ = Model::CreateFromOBJ("block");
 
 
 	// 要素数
@@ -84,7 +85,7 @@ void GameScene::Initialize() {
 
 	// デバッグカメラの生成
 	debugCamera_ = new DebugCamera(WinApp::kWindowWidth, WinApp::kWindowHeight);
-
+	debugCamera_->SetFarZ(1000);
 
 	// 3Dモデルの生成
 	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
