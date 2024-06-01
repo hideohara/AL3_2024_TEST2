@@ -11,7 +11,7 @@
 #include "Skydome.h"
 #include "MathUtilityForText.h"
 #include <vector>
-
+#include "MapChipField.h"
 #include "DebugCamera.h"
 
 
@@ -88,6 +88,15 @@ private: // メンバ変数
 
 	// 3Dモデル
 	Model* modelSkydome_ = nullptr;
+
+
+	// マップチップフィールド
+	MapChipField* mapChipField_;
+
+
+	void GenerateBlocks();
+
+
 
 
 

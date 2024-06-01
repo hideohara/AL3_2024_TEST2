@@ -110,6 +110,7 @@
     <ClCompile Include="base\DirectXCommon.cpp" />
     <ClCompile Include="base\WinApp.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapChipField.cpp" />
     <ClCompile Include="MathUtilityForText.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="scene\GameScene.cpp" />
@@ -118,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="2d\ImGuiManager.h" />
+    <ClInclude Include="2d\MapChipField.h" />
     <ClInclude Include="2d\Sprite.h" />
     <ClInclude Include="3d\AxisIndicator.h" />
     <ClInclude Include="3d\CircleShadow.h" />
