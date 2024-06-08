@@ -13,7 +13,7 @@
 #include <vector>
 #include "MapChipField.h"
 #include "DebugCamera.h"
-
+#include "CameraController.h"
 
 
 /// <summary>
@@ -91,12 +91,12 @@ private: // メンバ変数
 
 
 	// マップチップフィールド
-	MapChipField* mapChipField_;
+	MapChipField* mapChipField_ = nullptr;
 
 
 	void GenerateBlocks();
 
-
+	CameraController* cameraController_ = nullptr;
 
 
 

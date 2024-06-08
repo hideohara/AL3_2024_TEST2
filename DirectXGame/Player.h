@@ -28,6 +28,9 @@ public:
     /// </summary>
     void Draw();
 
+    // 追加
+    const WorldTransform& GetWorldTransform() const { return worldTransform_; }
+
 private:
     // ワールド変換データ
     WorldTransform worldTransform_;

@@ -9,6 +9,13 @@ Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rot, const Vecto
 // 代入演算子オーバーロード
 // Vector3の足算
 Vector3& operator+=(Vector3& lhs, const Vector3& rhv);
+// 2項演算子オーバーロード
+// Vector3の足算
+const Vector3 operator+(const Vector3& v1, const Vector3& v2);
+
+
+
+
 
 
 // 行列の掛け算

@@ -14,9 +14,8 @@ GameScene::~GameScene() {
 	// クラスの解放
 	delete player_;
 	delete skydome_;
-
 	delete debugCamera_;
-
+	delete cameraController_;
 
 	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
 		for (WorldTransform* worldTransformBlock : worldTransformBlockLine) {
@@ -48,7 +47,7 @@ void GameScene::Initialize() {
 	model_ = Model::CreateFromOBJ("player");
 
 	// ビュープロジェクションの初期化
-	viewProjection_.farZ = 1000;
+	//viewProjection_.farZ = 1000;
 	viewProjection_.Initialize();
 
 
@@ -80,6 +79,11 @@ void GameScene::Initialize() {
 	// 自キャラの初期化
 	player_->Initialize(model_, &viewProjection_, playerPosition);
 
+	// 追従カメラ
+	cameraController_ = new CameraController();
+	cameraController_->Initialize();
+	cameraController_->SetTarget(player_);
+	cameraController_->Reset();
 }
 
 // 更新
@@ -93,6 +97,8 @@ void GameScene::Update() {
 	// スカイドームの更新
 	skydome_->Update();
 
+	// 追従カメラの更新
+	cameraController_->Update();
 
 #ifdef _DEBUG
 	if (input_->TriggerKey(DIK_0)) {
@@ -111,8 +117,10 @@ void GameScene::Update() {
 		viewProjection_.TransferMatrix();
 	}
 	else {
-		// ビュープロジェクション行列の更新と転送
-		viewProjection_.UpdateMatrix();
+		viewProjection_.matView = cameraController_->GetViewProjection().matView;
+		viewProjection_.matProjection = cameraController_->GetViewProjection().matProjection;
+		// ビュープロジェクション行列の転送
+		viewProjection_.TransferMatrix();
 	}
 
 
