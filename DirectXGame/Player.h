@@ -31,6 +31,10 @@ public:
     // 追加
     const WorldTransform& GetWorldTransform() const { return worldTransform_; }
 
+    const Vector3& GetVelocity() const { return velocity_; }
+
+
+
 private:
     // ワールド変換データ
     WorldTransform worldTransform_;
@@ -76,11 +80,6 @@ private:
     static inline const float kJumpAcceleration = 1.0f;
     // 接地状態フラグ
     bool onGround_ = true;
-
-
-
-
-
 
 
 
