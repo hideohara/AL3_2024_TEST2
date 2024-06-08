@@ -65,6 +65,18 @@ private:
     static inline const float kTimeTurn = 0.3f;
 
 
+    // 重力加速度（下方向）
+    static inline const float kGravityAcceleration = 0.1f;
+    // 最大落下速度（下方向）
+    static inline const float kLimitFallSpeed = 1.0f;
+    // ジャンプ初速（上方向）
+    static inline const float kJumpAcceleration = 1.0f;
+    // 接地状態フラグ
+    bool onGround_ = true;
+
+
+
+
 
 
 
