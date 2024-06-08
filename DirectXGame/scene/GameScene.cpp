@@ -52,10 +52,6 @@ void GameScene::Initialize() {
 	viewProjection_.Initialize();
 
 
-	// 自キャラの生成
-	player_ = new Player();
-	// 自キャラの初期化
-	player_->Initialize(model_, &viewProjection_);
 
 	// ブロック3Dモデルの生成
 	modelBlock_ = Model::CreateFromOBJ("block");
@@ -72,13 +68,17 @@ void GameScene::Initialize() {
 	// スカイドームの初期化
 	skydome_->Initialize(modelSkydome_, &viewProjection_);
 
-
+	// マップ処理の生成
 	mapChipField_ = new MapChipField;
 	mapChipField_->LoadMapChipCsv("Resources/blocks.csv");
-
-
 	GenerateBlocks();
 
+	// 自キャラの生成
+	player_ = new Player();
+	// 座標をマップチップ番号で指定
+	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(3, 18);
+	// 自キャラの初期化
+	player_->Initialize(model_, &viewProjection_, playerPosition);
 
 }
 
