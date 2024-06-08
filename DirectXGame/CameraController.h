@@ -62,9 +62,9 @@ private:
 
 
     // 速度掛け率
-    static inline const float kVelocityBias = 0.5f;
+    static inline const float kVelocityBias = 30.0f;
 
-    static inline const Rect targetMargin = { -9.0f, 9.0f, -5.0f, 5.0f };
+    static inline const Rect targetMargin = { -9.0f, 9.0f, -9.0f, 9.0f };
 
 
 
