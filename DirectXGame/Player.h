@@ -3,7 +3,9 @@
 #include "Model.h"
 #include "WorldTransform.h"
 #include "MathUtilityForText.h"
+#include "ViewProjection.h"
 
+class MapChipField;
 
 
 class Player
@@ -32,6 +34,10 @@ public:
     const WorldTransform& GetWorldTransform() const { return worldTransform_; }
 
     const Vector3& GetVelocity() const { return velocity_; }
+
+
+    void SetMapChipField(MapChipField* mapChipField) { mapChipField_ = mapChipField; }
+
 
 
 
@@ -81,8 +87,48 @@ private:
     // 接地状態フラグ
     bool onGround_ = true;
 
+    // マップチップによるフィールド
+    MapChipField* mapChipField_ = nullptr;
 
 
+    // キャラクターの当たり判定サイズ
+    static inline const float kWidth = 0.8f;
+    static inline const float kHeight = 0.8f;
+
+    // ①移動入力
+    void InputMove();
+
+    // ②マップ衝突判定
+    struct CollisionMapInfo {
+        bool ceiling = false;
+        bool landing = false;
+        bool hitWall = false;
+        Vector3 move;
+    };
+
+    // 角
+    enum Corner {
+        kRightBottom,    // 右下
+        kLeftBottom,     // 左下
+        kRightTop,       // 右上
+        kLeftTop,        // 左上
+
+        kNumCorner       // 要素数
+    };
+
+    void CheckMapCollision(CollisionMapInfo& info);
+    void CheckMapCollisionUp(CollisionMapInfo& info);
+
+    // ③判定結果を反映して移動させる
+    void CheckMapMove(CollisionMapInfo& info);
+
+    // ④天井に接触している場合の処理
+    void CheckMapCeiling(CollisionMapInfo& info);
+
+    Vector3 CornerPosition(const Vector3& center, Corner corner);
+    static inline const float kBlank = 0.04f;
+    // ⑦旋回制御
+    void AnimateTurn();
 
 };
 

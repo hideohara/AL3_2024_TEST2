@@ -78,6 +78,7 @@ void GameScene::Initialize() {
 	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(3, 18);
 	// 自キャラの初期化
 	player_->Initialize(model_, &viewProjection_, playerPosition);
+	player_->SetMapChipField(mapChipField_);
 
 	// 追従カメラ
 	cameraController_ = new CameraController();
