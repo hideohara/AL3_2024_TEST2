@@ -78,9 +78,8 @@ private:
     static inline const float kAttenuation = 0.02f;
     // 最大速度
     static inline const float kLimitRunSpeed = 1.0f;
-
-
-
+    // 着地時の速度減衰率
+    static inline const float kAttenuationWall = 0.1f;
 
     // 左右
     enum class LRDirection {
@@ -123,6 +122,8 @@ private:
     void CheckMapCollision(CollisionMapInfo& info);
     void CheckMapCollisionUp(CollisionMapInfo& info);
     void CheckMapCollisionDown(CollisionMapInfo& info);
+    void CheckMapCollisionRight(CollisionMapInfo& info);
+    void CheckMapCollisionLeft(CollisionMapInfo& info);
 
     // ③判定結果を反映して移動させる
     void CheckMapMove(CollisionMapInfo& info);
@@ -137,6 +138,9 @@ private:
 
     //⑥接地状態の切り替え処理
     void CheckMapLanding(const CollisionMapInfo& info);
+
+    //⑤壁に接触している場合の処理
+    void CheckMapWall(const CollisionMapInfo& info);
 
 };
 
