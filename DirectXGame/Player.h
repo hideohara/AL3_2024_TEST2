@@ -12,6 +12,23 @@ class Player
 {
 
 public:
+    struct CollisionMapInfo {
+        bool ceiling = false;
+        bool landing = false;
+        bool hitWall = false;
+        Vector3 move;
+    };
+
+    // 角
+    enum Corner {
+        kRightBottom,    // 右下
+        kLeftBottom,     // 左下
+        kRightTop,       // 右上
+        kLeftTop,        // 左上
+
+        kNumCorner       // 要素数
+    };
+
     /// <summary>
     /// 初期化
     /// </summary>
@@ -63,6 +80,8 @@ private:
     static inline const float kLimitRunSpeed = 1.0f;
 
 
+
+
     // 左右
     enum class LRDirection {
         kRight,
@@ -79,13 +98,15 @@ private:
 
 
     // 重力加速度（下方向）
-    static inline const float kGravityAcceleration = 0.1f;
+    static inline const float kGravityAcceleration = 0.05f;
     // 最大落下速度（下方向）
-    static inline const float kLimitFallSpeed = 1.0f;
+    static inline const float kLimitFallSpeed = 0.5f;
     // ジャンプ初速（上方向）
-    static inline const float kJumpAcceleration = 1.0f;
+    static inline const float kJumpAcceleration = 0.5f;
     // 接地状態フラグ
     bool onGround_ = true;
+    // 着地時の速度減衰率
+    static inline const float kAttenuationLanding = 0.1f;
 
     // マップチップによるフィールド
     MapChipField* mapChipField_ = nullptr;
@@ -99,25 +120,9 @@ private:
     void InputMove();
 
     // ②マップ衝突判定
-    struct CollisionMapInfo {
-        bool ceiling = false;
-        bool landing = false;
-        bool hitWall = false;
-        Vector3 move;
-    };
-
-    // 角
-    enum Corner {
-        kRightBottom,    // 右下
-        kLeftBottom,     // 左下
-        kRightTop,       // 右上
-        kLeftTop,        // 左上
-
-        kNumCorner       // 要素数
-    };
-
     void CheckMapCollision(CollisionMapInfo& info);
     void CheckMapCollisionUp(CollisionMapInfo& info);
+    void CheckMapCollisionDown(CollisionMapInfo& info);
 
     // ③判定結果を反映して移動させる
     void CheckMapMove(CollisionMapInfo& info);
@@ -126,9 +131,12 @@ private:
     void CheckMapCeiling(CollisionMapInfo& info);
 
     Vector3 CornerPosition(const Vector3& center, Corner corner);
-    static inline const float kBlank = 0.04f;
+    static inline const float kBlank = 0.2f;
     // ⑦旋回制御
     void AnimateTurn();
+
+    //⑥接地状態の切り替え処理
+    void CheckMapLanding(const CollisionMapInfo& info);
 
 };
 
