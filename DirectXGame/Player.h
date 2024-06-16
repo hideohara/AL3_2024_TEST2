@@ -141,6 +141,5 @@ private:
 
     //⑤壁に接触している場合の処理
     void CheckMapWall(const CollisionMapInfo& info);
-
 };
 
