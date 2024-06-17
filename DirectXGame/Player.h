@@ -106,6 +106,8 @@ private:
     bool onGround_ = true;
     // 着地時の速度減衰率
     static inline const float kAttenuationLanding = 0.1f;
+    // 落下用
+    static inline const float kGroundSearchHeight = 0.06f;
 
     // マップチップによるフィールド
     MapChipField* mapChipField_ = nullptr;
