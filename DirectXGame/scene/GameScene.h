@@ -14,6 +14,7 @@
 #include "MapChipField.h"
 #include "DebugCamera.h"
 #include "CameraController.h"
+#include "Enemy.h"
 
 
 /// <summary>
@@ -98,7 +99,9 @@ private: // メンバ変数
 
 	CameraController* cameraController_ = nullptr;
 
-
+	// 敵
+	Model* modelEnemy_ = nullptr;
+	Enemy* enemy_ = nullptr;
 
 
 };

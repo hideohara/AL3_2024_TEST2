@@ -23,8 +23,6 @@ void Player::Initialize(Model* model, ViewProjection* viewProjection, const Vect
 	// ワールド変換の初期化
 	worldTransform_.Initialize();
 	worldTransform_.rotation_.y = std::numbers::pi_v<float> / 2.0f;
-
-
 }
 
 void Player::Update()

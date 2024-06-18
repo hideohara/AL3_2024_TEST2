@@ -9,6 +9,7 @@ GameScene::~GameScene() {
 	delete model_;
 	delete modelBlock_;
 	delete modelSkydome_;
+	delete modelEnemy_;
 
 
 	// クラスの解放
@@ -16,6 +17,7 @@ GameScene::~GameScene() {
 	delete skydome_;
 	delete debugCamera_;
 	delete cameraController_;
+	delete enemy_;
 
 	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
 		for (WorldTransform* worldTransformBlock : worldTransformBlockLine) {
@@ -75,7 +77,7 @@ void GameScene::Initialize() {
 	// 自キャラの生成
 	player_ = new Player();
 	// 座標をマップチップ番号で指定
-	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(3, 18);
+	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(2, 17);
 	// 自キャラの初期化
 	player_->Initialize(model_, &viewProjection_, playerPosition);
 	player_->SetMapChipField(mapChipField_);
@@ -88,6 +90,14 @@ void GameScene::Initialize() {
 
 	CameraController::Rect cameraArea = { 12.0f, 100 - 12.0f, 6.0f, 6.0f };
 	cameraController_->SetMovableArea(cameraArea);
+
+	// 敵
+	modelEnemy_ = Model::CreateFromOBJ("enemy");
+	enemy_ = new Enemy();
+	// 座標をマップチップ番号で指定
+	Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(11, 18);
+	// 自キャラの初期化
+	enemy_->Initialize(modelEnemy_, &viewProjection_, enemyPosition);
 
 }
 
@@ -104,6 +114,9 @@ void GameScene::Update() {
 
 	// 追従カメラの更新
 	cameraController_->Update();
+
+	// 敵の更新
+	enemy_->Update();
 
 #ifdef _DEBUG
 	if (input_->TriggerKey(DIK_0)) {
@@ -202,6 +215,8 @@ void GameScene::Draw() {
 	//　スカイドームの描画
 	skydome_->Draw();
 
+	// 敵の更新
+	enemy_->Draw();
 
 	// ブロックの描画
 	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
