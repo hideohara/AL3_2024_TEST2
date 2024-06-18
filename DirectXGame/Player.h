@@ -4,8 +4,10 @@
 #include "WorldTransform.h"
 #include "MathUtilityForText.h"
 #include "ViewProjection.h"
+#include "AABB.h"
 
 class MapChipField;
+class Enemy;
 
 
 class Player
@@ -55,8 +57,14 @@ public:
 
     void SetMapChipField(MapChipField* mapChipField) { mapChipField_ = mapChipField; }
 
+    // ワールド座標を取得
+    Vector3 GetWorldPosition();
 
+    // AABBを取得
+    AABB GetAABB();
 
+    // 衝突応答
+    void OnCollision(const Enemy* enemy);
 
 private:
     // ワールド変換データ

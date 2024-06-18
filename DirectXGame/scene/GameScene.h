@@ -104,4 +104,8 @@ private: // メンバ変数
 	//Enemy* enemy_ = nullptr;
 	std::list<Enemy*> enemies_;
 
+
+	// 全ての当たり判定を行う
+	void CheckAllCollisions();
+
 };
