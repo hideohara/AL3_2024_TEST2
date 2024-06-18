@@ -101,7 +101,7 @@ private: // メンバ変数
 
 	// 敵
 	Model* modelEnemy_ = nullptr;
-	Enemy* enemy_ = nullptr;
-
+	//Enemy* enemy_ = nullptr;
+	std::list<Enemy*> enemies_;
 
 };
