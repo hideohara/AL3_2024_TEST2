@@ -15,7 +15,7 @@
 #include "DebugCamera.h"
 #include "CameraController.h"
 #include "Enemy.h"
-
+#include "DeathParticles.h"
 
 /// <summary>
 /// ゲームシーン
@@ -108,4 +108,7 @@ private: // メンバ変数
 	// 全ての当たり判定を行う
 	void CheckAllCollisions();
 
+	// デスパーティクル
+	DeathParticles* deathParticles_ = nullptr;
+	Model* modelDeathParticles_ = nullptr;
 };

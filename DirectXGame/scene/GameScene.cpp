@@ -10,13 +10,15 @@ GameScene::~GameScene() {
 	delete modelBlock_;
 	delete modelSkydome_;
 	delete modelEnemy_;
-
+	delete modelDeathParticles_;
 
 	// クラスの解放
 	delete player_;
 	delete skydome_;
 	delete debugCamera_;
 	delete cameraController_;
+	delete deathParticles_;
+
 	//delete enemy_;
 	for (Enemy* enemy : enemies_) {
 		delete enemy;
@@ -106,18 +108,20 @@ void GameScene::Initialize() {
 
 	for (int32_t i = 0; i < 3; ++i) {
 		Enemy* newEnemy = new Enemy();
-		Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(11+i*3, 18-i);
+		Vector3 enemyPosition = mapChipField_->GetMapChipPositionByIndex(11 + i * 3, 18 - i);
 		newEnemy->Initialize(modelEnemy_, &viewProjection_, enemyPosition);
 		enemies_.push_back(newEnemy);
 	}
 
-
+	// デスパーティクル
+	modelDeathParticles_ = Model::CreateFromOBJ("deathParticle", true);
+	deathParticles_ = new DeathParticles();
+	deathParticles_->Initialize(modelDeathParticles_, &viewProjection_, {5,5});
 }
+
 
 // 更新
 void GameScene::Update() {
-
-	
 
 	// 自キャラの更新
 	player_->Update();
@@ -133,6 +137,7 @@ void GameScene::Update() {
 		enemy->Update();
 	}
 
+	deathParticles_->Update();
 
 	// 全ての当たり判定を行う
 	CheckAllCollisions();
@@ -250,7 +255,7 @@ void GameScene::Draw() {
 		}
 	}
 
-
+	deathParticles_->Draw();
 
 
 
