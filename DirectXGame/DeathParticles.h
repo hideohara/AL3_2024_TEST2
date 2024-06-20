@@ -5,6 +5,7 @@
 #include "MathUtilityForText.h"
 #include "ViewProjection.h"
 #include <array>
+#include <numbers>
 
 class DeathParticles
 {
@@ -38,6 +39,25 @@ private:
     Model* model_ = nullptr;
 
     ViewProjection* viewProjection_ = nullptr;
+
+
+    // 存続時間（消滅までの時間）<秒>
+    static inline const float kDuration = 1;
+    // 移動の速さ
+    static inline const float kSpeed = 0.1f;
+    // 分割した1個分の角度
+    static inline const float kAngleUnit = std::numbers::pi_v<float> / kNumParticles;
+
+    // 終了フラグ
+    bool isFinished_ = false;
+    // 経過時間カウント
+    float counter_ = 0.0f;
+
+    // 色変更オブジェクト
+    ObjectColor objectColor_;
+    // 色の数値
+    Vector4 color_;
+
 
 };
 
