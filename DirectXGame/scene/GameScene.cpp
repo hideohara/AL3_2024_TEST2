@@ -116,7 +116,9 @@ void GameScene::Initialize() {
 	// デスパーティクル
 	modelDeathParticles_ = Model::CreateFromOBJ("deathParticle", true);
 	deathParticles_ = new DeathParticles();
-	deathParticles_->Initialize(modelDeathParticles_, &viewProjection_, {5,5});
+	player_->Update();
+	Vector3 Position = player_->GetWorldPosition();
+	deathParticles_->Initialize(modelDeathParticles_, &viewProjection_, Position);
 }
 
 
@@ -137,7 +139,10 @@ void GameScene::Update() {
 		enemy->Update();
 	}
 
-	deathParticles_->Update();
+	// デスパーティクル
+	if (deathParticles_) {
+		deathParticles_->Update();
+	}
 
 	// 全ての当たり判定を行う
 	CheckAllCollisions();
@@ -255,9 +260,10 @@ void GameScene::Draw() {
 		}
 	}
 
-	deathParticles_->Draw();
-
-
+	// デスパーティクル
+	if (deathParticles_) {
+		deathParticles_->Draw();
+	}
 
 	// 3Dオブジェクト描画後処理
 	Model::PostDraw();
