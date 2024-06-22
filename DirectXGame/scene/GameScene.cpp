@@ -183,6 +183,11 @@ void GameScene::Update() {
 				worldTransformBlock->UpdateMatrix();
 			}
 		}
+
+		// ゲームシーンの終了条件
+		if (deathParticles_ && deathParticles_->IsFinished()) {
+			finished_ = true;
+		}
 		break;
 	}
 
@@ -211,6 +216,9 @@ void GameScene::Update() {
 
 	// フェーズの切り替え
 	ChangePhase();
+
+
+
 }
 
 void GameScene::Draw() {
@@ -242,7 +250,9 @@ void GameScene::Draw() {
 
 
 	// 自キャラの描画
-	player_->Draw();
+	if (phase_ == Phase::kPlay) {
+		player_->Draw();
+	}
 
 	//　スカイドームの描画
 	skydome_->Draw();

@@ -52,6 +52,9 @@ public: // メンバ関数
 	// デスフラグのgetter
 	bool IsDead() const { return isDead_; }
 
+	// デスフラグのgetter
+	bool IsFinished() const { return finished_; }
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -132,5 +135,8 @@ private: // メンバ変数
 	// デスフラグ
 	bool isDead_ = false;
 
+
+	// 終了フラグ
+	bool finished_ = false;
 
 };
