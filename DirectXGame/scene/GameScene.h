@@ -48,6 +48,12 @@ public: // メンバ関数
 	/// </summary>
 	void Draw();
 
+	// デスフラグのgetter
+	bool IsDead() const { return isDead_; }
+
+	// デスフラグのgetter
+	bool IsFinished() const { return finished_; }
+
 private: // メンバ変数
 	DirectXCommon* dxCommon_ = nullptr;
 	Input* input_ = nullptr;
@@ -111,4 +117,24 @@ private: // メンバ変数
 	// デスパーティクル
 	DeathParticles* deathParticles_ = nullptr;
 	Model* modelDeathParticles_ = nullptr;
+
+
+	// ゲームのフェーズ（型）
+	enum class Phase {
+		kPlay,  // ゲームプレイ
+		kDeath, // デス演出
+	};
+
+	// ゲームの現在フェーズ（変数）
+	Phase phase_;
+
+	// フェーズの切り替え
+	void ChangePhase();
+
+	// デスフラグ
+	bool isDead_ = false;
+
+	// 終了フラグ
+	bool finished_ = false;
+
 };

@@ -28,6 +28,9 @@ public:
     /// </summary>
     void Draw();
 
+    // デスフラグのgetter
+    bool IsFinished() const { return isFinished_; }
+
 private:
 
     // パーティクルの個数
@@ -46,7 +49,7 @@ private:
     // 移動の速さ
     static inline const float kSpeed = 0.1f;
     // 分割した1個分の角度
-    static inline const float kAngleUnit = std::numbers::pi_v<float> / kNumParticles;
+    static inline const float kAngleUnit = 2 * std::numbers::pi_v<float> / kNumParticles;
 
     // 終了フラグ
     bool isFinished_ = false;
